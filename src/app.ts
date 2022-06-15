@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import routes from "./routes";
+import secrets from "./secrets.json";
 
 const app = express();
 
@@ -38,7 +39,10 @@ routes(app);
 //     return res.send(req.params.id);
 // };
 
-// app.get("/api/task/:id", getTask);
+app.get("/task", (req: Request, res: Response) => {
+    return res.send(`aaa ${secrets.DB}`);
+    //return res.redirect("http://google.com");
+});
 
 // app.get("/api/task/:id", [middleware_test, getTask]);
 
