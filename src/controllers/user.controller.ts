@@ -4,6 +4,7 @@ import secrets from "../secrets.json";
 import { User, IUser } from "../models/user.model";
 import Joi from "joi";
 import passwordComplexity from "joi-password-complexity";
+import jwt from "jsonwebtoken";
 
 export async function run() {
     const user = new User({
@@ -73,6 +74,37 @@ export const loginUser = async (req: Request, res: Response) => {
         const token = user.generateAuthToken();
         res.status(200).send({ data: token, message: "Logged in" });
     } catch (error) {
+        res.status(500).send({ message: "Internal server error" });
+    }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+    try {
+        const token = req.headers.authorization?.split(" ")[1];
+        if (typeof token === "undefined") {
+            res.status(403).send({ message: "Forbidden" });
+            return;
+        }
+        try {
+            const jwt_payload = jwt.verify(
+                token,
+                secrets.JWTPRIVATEKEY
+            ) as jwt.JwtPayload;
+            const user_id: string = jwt_payload._id;
+            console.log(user_id);
+            const user = await User.findOneAndDelete({ _id: user_id });
+            console.log(user);
+            if (user) {
+                res.status(200).send({ message: "User deleted" });
+                return;
+            }
+            res.status(404).send({ message: "User not found" });
+        } catch (error) {
+            console.log(error);
+            res.status(400).send({ message: "Invalid token" });
+        }
+    } catch (error) {
+        console.log(error);
         res.status(500).send({ message: "Internal server error" });
     }
 };

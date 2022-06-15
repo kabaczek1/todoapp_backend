@@ -1,5 +1,10 @@
 import { Express, NextFunction, Request, Response } from "express";
-import { run, registerUser, loginUser } from "./controllers/user.controller";
+import {
+    run,
+    registerUser,
+    loginUser,
+    deleteUser,
+} from "./controllers/user.controller";
 
 const routes = (app: Express) => {
     app.route("/")
@@ -16,13 +21,14 @@ const routes = (app: Express) => {
             return res.send("DELETE");
         });
 
-    app.route("/user").get(async (req: Request, res: Response) => {
-        let test = await run().catch((err) => console.log(err));
-        return res.json(test);
-    });
+    // app.route("/user").get(async (req: Request, res: Response) => {
+    //     let test = await run().catch((err) => console.log(err));
+    //     return res.json(test);
+    // });
 
     app.route("/register").post(registerUser);
     app.route("/login").post(loginUser);
+    app.route("/deleteuser").post(deleteUser);
 };
 
 export default routes;
