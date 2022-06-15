@@ -4,3 +4,4 @@ package-lock.json
 *.log
 *.gz
 src/secrets.json
+NOTES.txt
