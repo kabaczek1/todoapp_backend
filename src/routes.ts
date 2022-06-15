@@ -1,4 +1,5 @@
 import { Express, NextFunction, Request, Response } from "express";
+import { run } from "./controllers/user.controller";
 
 const routes = (app: Express) => {
     app.route("/")
@@ -14,6 +15,11 @@ const routes = (app: Express) => {
         .delete((req: Request, res: Response) => {
             return res.send("DELETE");
         });
+
+    app.route("/user").get(async (req: Request, res: Response) => {
+        let test = await run().catch((err) => console.log(err));
+        return res.json(test);
+    });
 };
 
 export default routes;
