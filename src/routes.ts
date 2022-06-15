@@ -1,5 +1,5 @@
 import { Express, NextFunction, Request, Response } from "express";
-import { run } from "./controllers/user.controller";
+import { run, registerUser, loginUser } from "./controllers/user.controller";
 
 const routes = (app: Express) => {
     app.route("/")
@@ -20,6 +20,9 @@ const routes = (app: Express) => {
         let test = await run().catch((err) => console.log(err));
         return res.json(test);
     });
+
+    app.route("/register").post(registerUser);
+    app.route("/login").post(loginUser);
 };
 
 export default routes;
