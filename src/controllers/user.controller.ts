@@ -3,7 +3,7 @@ import { User } from "../models/user.model";
 import secrets from "../secrets.json";
 
 export async function run() {
-    await connect(secrets.DB);
+    //await connect(secrets.DB);
 
     const user = new User({
         name: "test",
