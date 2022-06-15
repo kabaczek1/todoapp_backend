@@ -108,3 +108,41 @@ export const deleteUser = async (req: Request, res: Response) => {
         res.status(500).send({ message: "Internal server error" });
     }
 };
+
+export const updateUser = async (req: Request, res: Response) => {
+    try {
+        const { error } = validate(req.body);
+        if (error)
+            return res.status(400).send({ message: error.details[0].message });
+        const token = req.headers.authorization?.split(" ")[1];
+        if (typeof token === "undefined") {
+            res.status(403).send({ message: "Forbidden" });
+            return;
+        }
+        try {
+            const jwt_payload = jwt.verify(
+                token,
+                secrets.JWTPRIVATEKEY
+            ) as jwt.JwtPayload;
+            const user_id: string = jwt_payload._id;
+            // console.log(user_id);
+            let user = await User.findOne({ _id: user_id });
+            // console.log(user);
+            if (user) {
+                const salt = await bcrypt.genSalt(Number(secrets.SALT));
+                const hashPassword = await bcrypt.hash(req.body.password, salt);
+                // @ts-ignore
+                await user?.updateOne({ ...req.body, password: hashPassword });
+                res.status(200).send({ message: "User updated" });
+                return;
+            }
+            res.status(404).send({ message: "User not found" });
+        } catch (error) {
+            console.log(error);
+            res.status(400).send({ message: "Invalid token" });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ message: "Internal server error" });
+    }
+};

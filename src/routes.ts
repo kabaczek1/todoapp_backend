@@ -1,9 +1,9 @@
 import { Express, NextFunction, Request, Response } from "express";
 import {
-    run,
     registerUser,
     loginUser,
     deleteUser,
+    updateUser,
 } from "./controllers/user.controller";
 
 const routes = (app: Express) => {
@@ -21,14 +21,10 @@ const routes = (app: Express) => {
             return res.send("DELETE");
         });
 
-    // app.route("/user").get(async (req: Request, res: Response) => {
-    //     let test = await run().catch((err) => console.log(err));
-    //     return res.json(test);
-    // });
-
     app.route("/register").post(registerUser);
     app.route("/login").post(loginUser);
     app.route("/deleteuser").post(deleteUser);
+    app.route("/updateuser").post(updateUser);
 };
 
 export default routes;
