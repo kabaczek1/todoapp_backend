@@ -72,7 +72,6 @@ export const loginUser = async (req: Request, res: Response) => {
         //@ts-ignore
         const token = user.generateAuthToken();
         res.status(200).send({ data: token, message: "Logged in" });
-        console.log("asfd");
     } catch (error) {
         res.status(500).send({ message: "Internal server error" });
     }
