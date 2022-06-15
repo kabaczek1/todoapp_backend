@@ -91,9 +91,9 @@ export const deleteUser = async (req: Request, res: Response) => {
                 secrets.JWTPRIVATEKEY
             ) as jwt.JwtPayload;
             const user_id: string = jwt_payload._id;
-            console.log(user_id);
+            // console.log(user_id);
             const user = await User.findOneAndDelete({ _id: user_id });
-            console.log(user);
+            // console.log(user);
             if (user) {
                 res.status(200).send({ message: "User deleted" });
                 return;
