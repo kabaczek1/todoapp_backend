@@ -5,6 +5,12 @@ import {
     deleteUser,
     updateUser,
 } from "./controllers/user.controller";
+import {
+    getTask,
+    addTask,
+    updateTask,
+    deleteTask,
+} from "./controllers/task.controller";
 
 const routes = (app: Express) => {
     app.route("/")
@@ -26,23 +32,8 @@ const routes = (app: Express) => {
     app.route("/register").post(registerUser);
     app.route("/login").post(loginUser);
     //task
-    app.route("/task")
-        .get((req: Request, res: Response) => {
-            return res.send("GET tasks");
-        })
-        .post((req: Request, res: Response) => {
-            return res.send("POST new task");
-        });
-    app.route("/task/:id")
-        .get((req: Request, res: Response) => {
-            return res.send("GET task: " + req.params.id);
-        })
-        .put((req: Request, res: Response) => {
-            return res.send("PUT task: " + req.params.id);
-        })
-        .delete((req: Request, res: Response) => {
-            return res.send("DELETE task: " + req.params.id);
-        });
+    app.route("/task").get(getTask).post(addTask);
+    app.route("/task/:id").get(getTask).put(updateTask).delete(deleteTask);
 };
 
 export default routes;

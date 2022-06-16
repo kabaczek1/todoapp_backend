@@ -6,17 +6,17 @@ import Joi from "joi";
 import passwordComplexity from "joi-password-complexity";
 import jwt from "jsonwebtoken";
 
-export async function run() {
-    const user = new User({
-        name: "test",
-        email: "test@test.test",
-        password: "aaa",
-    });
-    await user.save();
+// export async function run() {
+//     const user = new User({
+//         name: "test",
+//         email: "test@test.test",
+//         password: "aaa",
+//     });
+//     await user.save();
 
-    console.log(user.email);
-    return user.email;
-}
+//     console.log(user.email);
+//     return user.email;
+// }
 
 export const validate = (data: IUser) => {
     const schema = Joi.object({
