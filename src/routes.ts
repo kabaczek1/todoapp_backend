@@ -13,19 +13,6 @@ import {
 } from "./controllers/task.controller";
 
 const routes = (app: Express) => {
-    app.route("/")
-        .get((req: Request, res: Response) => {
-            return res.send("GET");
-        })
-        .post((req: Request, res: Response) => {
-            return res.send("POST");
-        })
-        .put((req: Request, res: Response) => {
-            return res.send("PUT");
-        })
-        .delete((req: Request, res: Response) => {
-            return res.send("DELETE");
-        });
     // user
     app.route("/user").put(updateUser).delete(deleteUser);
     // auth
