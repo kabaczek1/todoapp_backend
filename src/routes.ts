@@ -18,7 +18,7 @@ const routes = (app: Express) => {
     // auth
     app.route("/register").post(registerUser);
     app.route("/login").post(loginUser);
-    //task
+    // task
     app.route("/task").get(getTask).post(addTask);
     app.route("/task/:id").get(getTask).put(updateTask).delete(deleteTask);
 };
