@@ -13,7 +13,6 @@ app.use(cors());
 
 routes(app);
 
-const port = 3000;
-app.listen(port, () => {
-    console.log(`Backend started at http://localhost:${port}`);
+app.listen(secrets.PORT, () => {
+    console.log(`Backend started at http://localhost:${secrets.PORT}`);
 });

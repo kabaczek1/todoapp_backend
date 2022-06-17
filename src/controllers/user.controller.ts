@@ -72,7 +72,11 @@ export const loginUser = async (req: Request, res: Response) => {
                 .send({ message: " Incorrect email or password" });
         //@ts-ignore
         const token = user.generateAuthToken();
-        res.status(200).send({ data: token, message: "Logged in" });
+        res.status(200).send({
+            token: token,
+            message: "Logged in",
+            name: user.name,
+        });
     } catch (error) {
         res.status(500).send({ message: "Internal server error" });
     }

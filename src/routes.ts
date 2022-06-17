@@ -13,6 +13,9 @@ import {
 } from "./controllers/task.controller";
 
 const routes = (app: Express) => {
+    app.route("/test").get((req: Request, res: Response) => {
+        return res.send("test");
+    });
     // user
     app.route("/user").put(updateUser).delete(deleteUser);
     // auth
