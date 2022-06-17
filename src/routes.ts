@@ -13,8 +13,8 @@ import {
 } from "./controllers/task.controller";
 
 const routes = (app: Express) => {
-    app.route("/test").get((req: Request, res: Response) => {
-        return res.send("test");
+    app.route("/status").get((req: Request, res: Response) => {
+        return res.send("OK");
     });
     // user
     app.route("/user").put(updateUser).delete(deleteUser);
