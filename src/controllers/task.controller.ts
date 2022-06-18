@@ -62,7 +62,7 @@ export const addTask = async (req: Request, res: Response) => {
     await new Task({
         ...req.body,
         author: auth.id,
-        created_at: JSON.stringify(Date.now()),
+        created_at: Date.now(),
         done: false,
     }).save();
     return res.send("POST new task");
