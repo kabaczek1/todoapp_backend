@@ -6,7 +6,7 @@ export interface ITask {
     name: string;
     desc: string;
     done: boolean;
-    created_at: string;
+    created_at: number;
     subtasks: ISubtask[];
 }
 
@@ -15,7 +15,7 @@ const taskSchema = new Schema<ITask>({
     name: { type: String, required: true },
     desc: { type: String, required: false },
     done: { type: Boolean, required: true },
-    created_at: { type: String, required: true },
+    created_at: { type: Number, required: true },
     subtasks: [],
 });
 
