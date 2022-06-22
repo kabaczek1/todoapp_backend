@@ -84,9 +84,9 @@ export const updateTask = async (req: Request, res: Response) => {
                 },
                 req.body
             );
-            //console.log(req.body);
             if (task) {
-                return res.json(task);
+                const updatedTask = await Task.findOne({ _id: req.params.id });
+                return res.json(updatedTask);
             }
             return res.status(404).send("no task with that id");
         } catch (error) {
