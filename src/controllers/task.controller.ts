@@ -59,13 +59,14 @@ export const addTask = async (req: Request, res: Response) => {
         return res.status(403).send(auth.error);
     }
     //validate
-    await new Task({
+    const task = new Task({
         ...req.body,
         author: auth.id,
         created_at: Date.now(),
         done: false,
-    }).save();
-    return res.send("POST new task");
+    });
+    await task.save();
+    return res.json(task);
 };
 
 export const updateTask = async (req: Request, res: Response) => {
