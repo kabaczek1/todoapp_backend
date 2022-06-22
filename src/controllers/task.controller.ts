@@ -86,7 +86,7 @@ export const updateTask = async (req: Request, res: Response) => {
             );
             //console.log(req.body);
             if (task) {
-                return res.send("task updated");
+                return res.json(task);
             }
             return res.status(404).send("no task with that id");
         } catch (error) {
