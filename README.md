@@ -2,7 +2,9 @@
 
 simple backend service for todo_app
 
-uses: express, typescript
+uses: express, typescript, mongodb
+
+remember to start mongo
 
 How to get this to work:
 
